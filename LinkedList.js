@@ -1,22 +1,47 @@
 export class ListNode {
     value;
     next;
+
+    constructor(value, next)
+    {
+        this.value = value;
+        this.next = next;
+    }
 }
 
 export class LinkedList {
 
     createList(capacity) {
-        let first = new ListNode();
-        first.value = Math.floor((Math.random() * 100) / 100);
+        let first = new ListNode(Math.floor((Math.random() * 100)), null);
         let current = first;
 
         for(let i = 1; i < capacity; i++) {
-            let newNode = new ListNode();
-            newNode.next = null;
-            newNode.value = Math.floor((Math.random() * 100));
+            let newNode = new ListNode(Math.floor((Math.random() * 100)), null);
 
             current.next = newNode;
             current = newNode;
+        }
+
+        return first;
+    }
+
+    createLoopedList(capacity) {
+        let first = new ListNode(Math.floor((Math.random() * 100)), null);
+        let current = first;
+
+        if(capacity === 1) {
+            first.next = first;
+        }
+
+        for(let i = 1; i < capacity; i++) {
+            let newNode = new ListNode(Math.floor((Math.random() * 100)), null);
+
+            current.next = newNode;
+            current = newNode;
+
+            if(i === capacity - 1) {
+                current.next = first;
+            }
         }
 
         return first;
